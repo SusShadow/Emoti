@@ -6,14 +6,18 @@ html, body {
     background-size: cover;
 }
 .banner {
-    background: black;
-    color: black;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     text-align: center;
     color: white;
-    padding: 1px;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0px;
+    padding: 22px 0 18px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0;
 }
 .banner1 {
     background-color: rgba(255, 255, 255, 0);
@@ -93,27 +97,11 @@ html, body {
     background-attachment: fixed;
 }
  
-/* ── Banner (unchanged) ── */
-.banner {
-    background: black;
-    color: white;
-    text-align: center;
-    padding: 1px;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0px;
-}
+
  
 a:link, a:visited, a:hover {
     color: black;
     text-decoration: none;
-}
- 
-/* ── Outer wrapper ── */
-.banner1 {
-    background-color: transparent;
-    text-align: center;
-    padding: 40px 20px;
 }
  
 /* ── Chatbox ── */

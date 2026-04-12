@@ -449,14 +449,18 @@ html, body {
 }
 
 .banner {
-    background: black;
-    color: black;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     text-align: center;
     color: white;
-    padding: 1px;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0px;
+    padding: 22px 0 18px;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0;
 }
 
 /* 2. Modern Banner */
