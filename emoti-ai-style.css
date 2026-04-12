@@ -82,3 +82,156 @@ a:visited {
 a:hover {
     color: black; 
 }
+/* ── Global ── */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-image: url('background-home.png');
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+ 
+/* ── Banner (unchanged) ── */
+.banner {
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 1px;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0px;
+}
+ 
+a:link, a:visited, a:hover {
+    color: black;
+    text-decoration: none;
+}
+ 
+/* ── Outer wrapper ── */
+.banner1 {
+    background-color: transparent;
+    text-align: center;
+    padding: 40px 20px;
+}
+ 
+/* ── Chatbox ── */
+#chatbox {
+    width: 90%;
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+ 
+/* ── Messages area ── */
+#messages {
+    min-height: 200px;
+    max-height: 420px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.65;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+ 
+#messages::-webkit-scrollbar {
+    width: 4px;
+}
+#messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+#messages::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+}
+ 
+/* ── Messages ── */
+.msg-user {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 8px 0;
+}
+ 
+.msg-user b {
+    color: #fff;
+}
+ 
+.msg-ai {
+    color: rgba(125, 255, 210, 0.9);
+    margin: 8px 0;
+}
+ 
+.msg-ai b {
+    color: #7dffb3;
+}
+ 
+.msg-ai p {
+    margin: 4px 0;
+}
+ 
+/* ── Input row ── */
+#input-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+ 
+#userInput {
+    flex: 1;
+    padding: 11px 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+ 
+#userInput::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+ 
+#userInput:focus {
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+}
+ 
+/* ── Send button ── */
+button {
+    padding: 11px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    white-space: nowrap;
+}
+ 
+button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+ 
+button:active {
+    transform: scale(0.98);
+}
+ 

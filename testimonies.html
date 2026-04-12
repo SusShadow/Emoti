@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="testimonies-style.css">
+    <link rel="icon" type="image/x-icon" href="/logo.png">
+    <title>Emoti</title>
+</head>
+<body>
+    <a href="main.html"><div class="banner"><h1><center>About</center></h1></div></a>
+    <div class="banner1">
+        <h1>Personal stories</h1>
+    </div>
+ 
+    <div class="stories-section">
+ 
+        <!-- TESTIMONIALS -->
+        <div class="testimonials-grid">
+ 
+            <!-- Featured -->
+            <div class="t-card t-card-featured">
+                <div class="t-top">
+                    <div class="avatar">JM</div>
+                    <div>
+                        <div class="t-name">Jamie, 24</div>
+                        <div class="t-condition">Anxiety &amp; depression</div>
+                    </div>
+                </div>
+                <div class="t-body">
+                    <blockquote class="t-quote">I spent two years convinced that how I felt was just my personality — that I was broken by design. Therapy and small daily habits changed that. I learned my anxiety had a voice, and I didn't have to agree with everything it said. Life isn't perfect, but I wake up feeling like myself again.</blockquote>
+                    <div class="t-footer">
+                        <span class="t-badge"><span class="t-badge-dot"></span>Doing well today</span>
+                        <span class="t-time">6 months ago</span>
+                    </div>
+                </div>
+            </div>
+ 
+            <div class="t-card">
+                <div class="t-top">
+                    <div class="avatar">RS</div>
+                    <div>
+                        <div class="t-name">Riley, 31</div>
+                        <div class="t-condition">Burnout &amp; isolation</div>
+                    </div>
+                </div>
+                <blockquote class="t-quote">I'd convinced myself I was fine. The turning point was admitting I wasn't — that one honest conversation with a friend changed everything for me.</blockquote>
+                <div class="t-footer">
+                    <span class="t-badge"><span class="t-badge-dot"></span>Doing well today</span>
+                    <span class="t-time">3 months ago</span>
+                </div>
+            </div>
+ 
+            <div class="t-card">
+                <div class="t-top">
+                    <div class="avatar">AL</div>
+                    <div>
+                        <div class="t-name">Alex, 19</div>
+                        <div class="t-condition">Social anxiety</div>
+                    </div>
+                </div>
+                <blockquote class="t-quote">School felt like a war zone every day. Learning to be honest with myself — and then with others — genuinely saved me.</blockquote>
+                <div class="t-footer">
+                    <span class="t-badge"><span class="t-badge-dot"></span>Doing well today</span>
+                    <span class="t-time">1 month ago</span>
+                </div>
+            </div>
+ 
+            <div class="t-card">
+                <div class="t-top">
+                    <div class="avatar">MK</div>
+                    <div>
+                        <div class="t-name">Morgan, 27</div>
+                        <div class="t-condition">OCD &amp; panic attacks</div>
+                    </div>
+                </div>
+                <blockquote class="t-quote">My therapist told me recovery isn't a straight line. That one sentence gave me permission to keep going even on the hard days.</blockquote>
+                <div class="t-footer">
+                    <span class="t-badge"><span class="t-badge-dot"></span>Doing well today</span>
+                    <span class="t-time">2 months ago</span>
+                </div>
+            </div>
+ 
+            <div class="t-card">
+                <div class="t-top">
+                    <div class="avatar">TN</div>
+                    <div>
+                        <div class="t-name">Taylor, 22</div>
+                        <div class="t-condition">Grief &amp; low mood</div>
+                    </div>
+                </div>
+                <blockquote class="t-quote">After losing someone close I stopped being able to function. I never thought I'd feel joy again. Slowly, I did. It takes time — and that's okay.</blockquote>
+                <div class="t-footer">
+                    <span class="t-badge"><span class="t-badge-dot"></span>Doing well today</span>
+                    <span class="t-time">5 months ago</span>
+                </div>
+            </div>
+ 
+        </div>
+ 
+        <!-- DIVIDER -->
+        <div class="divider">Share your story</div>
+ 
+        <!-- FORM -->
+        <div class="form-card">
+            <div id="form-inner">
+                <p class="form-heading">Your story matters</p>
+                <p class="form-sub">If you've been through a hard time and come out the other side — even a little — your words could be exactly what someone else needs to read. All stories are reviewed before publishing.</p>
+ 
+                <div class="row-2">
+                    <div class="field">
+                        <label for="fname">First name</label>
+                        <input type="text" id="fname" placeholder="e.g. Jordan" maxlength="40">
+                    </div>
+                    <div class="field">
+                        <label for="fage">Age <span class="optional">(optional)</span></label>
+                        <input type="number" id="fage" placeholder="e.g. 23" min="13" max="99">
+                    </div>
+                </div>
+ 
+                <div class="field">
+                    <label for="ftopic">What did you experience?</label>
+                    <select id="ftopic">
+                        <option value="" disabled selected>Choose a topic…</option>
+                        <option>Anxiety</option>
+                        <option>Depression</option>
+                        <option>Burnout</option>
+                        <option>Social anxiety</option>
+                        <option>OCD</option>
+                        <option>Panic attacks</option>
+                        <option>Grief &amp; loss</option>
+                        <option>Trauma</option>
+                        <option>Eating disorder</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <p class="error-msg" id="err-topic">Please choose a topic.</p>
+ 
+                <div class="field">
+                    <label for="fstory">Your story</label>
+                    <textarea id="fstory" placeholder="Share what you went through and what helped you turn things around…" maxlength="600"></textarea>
+                </div>
+                <p class="char-hint" id="char-hint">0 / 600</p>
+                <p class="error-msg" id="err-story">Please write at least a sentence or two.</p>
+ 
+                <div class="anon-row" onclick="toggleAnon()">
+                    <div class="tog-track" id="tog">
+                        <div class="tog-thumb"></div>
+                    </div>
+                    <span class="anon-label">Post anonymously (hide my name)</span>
+                </div>
+ 
+                <button class="btn-submit" onclick="submitStory()">Submit my story</button>
+                <p class="form-note">Stories are reviewed within 48 hours. We never share personal details beyond what you include here.</p>
+            </div>
+ 
+            <div class="success-state" id="success">
+                <div class="success-icon">🌱</div>
+                <h3>Thank you for sharing</h3>
+                <p>Your story will be reviewed and published within 48 hours.<br>It means more than you know.</p>
+            </div>
+        </div>
+ 
+    </div>
+ 
+    <script>
+        // Scroll-reveal cards
+        const cards = document.querySelectorAll('.t-card');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('visible'), i * 90);
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.08 });
+        cards.forEach(c => obs.observe(c));
+ 
+        // Char counter
+        document.getElementById('fstory').addEventListener('input', function () {
+            const len = this.value.length;
+            const hint = document.getElementById('char-hint');
+            hint.textContent = len + ' / 600';
+            hint.classList.toggle('warn', len > 500);
+        });
+ 
+        // Anon toggle
+        let anon = false;
+        function toggleAnon() {
+            anon = !anon;
+            document.getElementById('tog').classList.toggle('on', anon);
+        }
+ 
+        // Submit
+        function submitStory() {
+            const topic = document.getElementById('ftopic');
+            const story = document.getElementById('fstory');
+            let ok = true;
+ 
+            document.getElementById('err-topic').style.display = 'none';
+            document.getElementById('err-story').style.display = 'none';
+            topic.classList.remove('error');
+            story.classList.remove('error');
+ 
+            if (!topic.value) {
+                topic.classList.add('error');
+                document.getElementById('err-topic').style.display = 'block';
+                ok = false;
+            }
+            if (story.value.trim().length < 20) {
+                story.classList.add('error');
+                document.getElementById('err-story').style.display = 'block';
+                ok = false;
+            }
+            if (!ok) return;
+ 
+            // Plug in your backend here, e.g. Formspree:
+            // fetch('https://formspree.io/f/YOUR_ID', {
+            //   method: 'POST',
+            //   headers: { 'Content-Type': 'application/json' },
+            //   body: JSON.stringify({
+            //     name:  anon ? 'Anonymous' : document.getElementById('fname').value,
+            //     age:   document.getElementById('fage').value,
+            //     topic: topic.value,
+            //     story: story.value
+            //   })
+            // });
+ 
+            document.getElementById('form-inner').style.display = 'none';
+            document.getElementById('success').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
