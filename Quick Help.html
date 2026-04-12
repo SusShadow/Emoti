@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/logo.png">
+    <title>Emoti — Quick Help</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            min-height: 100%;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-image: url('background-home.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            height: 64px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: white !important;
+            text-decoration: none !important;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.75) !important;
+            text-decoration: none !important;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: white !important; }
+
+        .nav-cta {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 8px 18px !important;
+            color: white !important;
+            transition: background 0.2s !important;
+        }
+
+        .nav-cta:hover { background: rgba(255,255,255,0.22) !important; }
+
+        .page {
+            padding: 36px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section { margin-bottom: 40px; }
+
+        .section-title {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            margin: 0 0 16px 4px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            width: 240px;
+            padding: 18px 22px;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+            transition: background 0.2s ease, border 0.2s ease;
+        }
+
+        .card:hover {
+            background: rgba(255,255,255,0.11);
+            border: 1px solid rgba(255,255,255,0.28);
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .card-body {
+            font-size: 0.78rem;
+            font-weight: 400;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
+        .card-body strong { font-weight: 700; opacity: 1; }
+
+        .card-body a {
+            color: white !important;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        /* BREATHING SECTION LAYOUT */
+        .breathing-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .breathing-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        /* BREATHING ANIMATOR */
+        .breath-widget {
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 22px 20px;
+            width: 220px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .breath-widget-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+        }
+
+        .breath-select-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .breath-select {
+            width: 100%;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 10px;
+            color: white;
+            font-family: inherit;
+            font-size: 0.75rem;
+            padding: 7px 10px;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .breath-select option { background: #1a2f3a; color: white; }
+
+        .circle-wrap {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .breath-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid rgba(125,255,210,0.25);
+        }
+
+        .breath-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 38% 38%, rgba(125,255,210,0.55), rgba(125,255,210,0.18));
+            border: 1.5px solid rgba(125,255,210,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s linear;
+        }
+
+        /* Ripple rings */
+        .ripple {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 1.5px solid rgba(125,255,210,0.15);
+            animation: none;
+        }
+
+        @keyframes rippleOut {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        .breath-phase {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: rgba(125,255,210,0.9);
+            letter-spacing: 0.04em;
+            min-height: 22px;
+            text-align: center;
+        }
+
+        .breath-count {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            min-height: 36px;
+            text-align: center;
+            line-height: 1;
+        }
+
+        .breath-btn {
+            width: 100%;
+            padding: 9px 0;
+            border-radius: 12px;
+            border: 1px solid rgba(125,255,210,0.3);
+            background: rgba(125,255,210,0.1);
+            color: rgba(125,255,210,0.9);
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            letter-spacing: 0.03em;
+        }
+
+        .breath-btn:hover { background: rgba(125,255,210,0.2); }
+        .breath-btn.stop { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.15); }
+        .breath-btn.stop:hover { background: rgba(255,255,255,0.12); }
+
+        .cycles-label {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.35);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="main.html" class="nav-logo">EMOTI</a>
+        <div class="nav-links">
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="resources.html">Resources</a>
+            <a href="emoti-ai.html" class="nav-cta">Talk with Emoti AI</a>
+        </div>
+    </nav>
+
+    <div class="page">
+
+        <section class="section">
+            <h2 class="section-title">🫁 Breathing Exercises</h2>
+            <div class="breathing-section">
+                <div class="breathing-cards">
+                    <div class="card">
+                        <div class="card-title">Box Breathing</div>
+                        <div class="card-body">Breathe in for <strong>4 seconds</strong>, hold for <strong>4</strong>, breathe out for <strong>4</strong>, hold for <strong>4</strong>. Repeat 4 times. Great for anxiety and stress.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">4-7-8 Breathing</div>
+                        <div class="card-body">Breathe in for <strong>4 seconds</strong>, hold for <strong>7</strong>, breathe out slowly for <strong>8</strong>. This one's super effective for calming down fast.</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Deep Belly Breathing</div>
+                        <div class="card-body">Put one hand on your chest, one on your belly. Breathe so only the belly hand moves. Slow, deep breaths — <strong>5 seconds in, 5 out</strong>.</div>
+                    </div>
+                </div>
+
+                <!-- BREATHING ANIMATOR -->
+                <div class="breath-widget">
+                    <div class="breath-widget-title">Try it now</div>
+
+                    <div class="breath-select-row">
+                        <select class="breath-select" id="breathMode" onchange="resetBreath()">
+                            <option value="box">Box Breathing (4-4-4-4)</option>
+                            <option value="478">4-7-8 Breathing</option>
+                            <option value="belly">Deep Belly (5-5)</option>
+                        </select>
+                    </div>
+
+                    <div class="circle-wrap">
+                        <div class="breath-ring"></div>
+                        <div class="ripple" id="ripple"></div>
+                        <div class="breath-circle" id="breathCircle"></div>
+                    </div>
+
+                    <div class="breath-phase" id="breathPhase">—</div>
+                    <div class="breath-count" id="breathCount"></div>
+                    <div class="cycles-label" id="cyclesLabel">0 cycles completed</div>
+
+                    <button class="breath-btn" id="breathBtn" onclick="toggleBreath()">Start</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">⚓ Grounding Techniques</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-title">5-4-3-2-1</div>
+                    <div class="card-body">Name <strong>5 things you can see</strong>, 4 you can touch, 3 you can hear, 2 you can smell, 1 you can taste. Brings you back to the present moment.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Cold Water</div>
+                    <div class="card-body">Splash cold water on your face or hold an ice cube. It sounds simple but it <strong>instantly snaps your nervous system</strong> out of panic mode.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Name Your Surroundings</div>
+                    <div class="card-body">Look around and quietly name everything you see. "Chair. Window. Cup. Light." It keeps your brain focused on <strong>right now</strong>, not what's spiraling.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">💪 Coping Strategies</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-title">Move Your Body</div>
+                    <div class="card-body">Even a <strong>5 minute walk</strong> can shift your mood. Exercise releases endorphins that genuinely help — you don't need a full workout.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Write It Out</div>
+                    <div class="card-body">Grab a notebook and just <strong>dump everything on the page</strong>. No filter, no grammar — just get it out of your head. It helps more than you'd think.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Talk to Someone</div>
+                    <div class="card-body">Reach out to a friend, family member, or anyone you trust. <strong>You don't have to handle things alone</strong> — even a quick text can help.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Distract Yourself</div>
+                    <div class="card-body">Put on a show, make food, play a game — sometimes the best move is to <strong>give your brain a break</strong> from whatever's weighing on you.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">⚠️ Crisis Warning Signs</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-title">In Yourself</div>
+                    <div class="card-body">Feeling hopeless, trapped, or like a burden. Withdrawing from people. Giving away possessions. Sudden calmness after a period of depression. <strong>These are signs to take seriously.</strong></div>
+                </div>
+                <div class="card">
+                    <div class="card-title">In Someone Else</div>
+                    <div class="card-body">Talking about wanting to die or having no reason to live. Big mood swings. Saying goodbye. Risky behavior. <strong>Trust your gut</strong> — if something feels off, check in.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">What To Do</div>
+                    <div class="card-body">Don't leave them alone. <strong>Ask directly</strong> — "Are you thinking about hurting yourself?" It doesn't plant ideas, it opens the door. Then get help together.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">🤝 How to Help a Friend</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-title">Just Listen</div>
+                    <div class="card-body">You don't need to fix anything. <strong>Just being there and listening</strong> is huge. Resist the urge to give advice unless they ask for it.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Check In Regularly</div>
+                    <div class="card-body">A simple <strong>"hey, how are you actually doing?"</strong> goes a long way. Keep showing up even if they push back — consistency matters.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Don't Promise Secrecy</div>
+                    <div class="card-body">If they're in danger, you may need to tell a trusted adult or call for help. <strong>Their safety comes first</strong> — a real friend does what keeps them safe.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Look After Yourself Too</div>
+                    <div class="card-body">Supporting someone in crisis is hard. <strong>You can't pour from an empty cup</strong> — make sure you're also talking to someone and taking care of yourself.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">🔗 Resources</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-title">Crisis Contacts</div>
+                    <div class="card-body">Need to talk to someone right now? <a href="contact.html"><strong>Visit our contacts page</strong></a> for hotlines in your country — available 24/7.</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Talk with Emoti AI</div>
+                    <div class="card-body">Want a judgment-free space to talk things through? <a href="emoti-ai.html"><strong>Emoti AI</strong></a> is here to listen anytime.</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const MODES = {
+            box:   { phases: ['Breathe in', 'Hold', 'Breathe out', 'Hold'], durations: [4, 4, 4, 4] },
+            '478': { phases: ['Breathe in', 'Hold', 'Breathe out'], durations: [4, 7, 8] },
+            belly: { phases: ['Breathe in', 'Breathe out'], durations: [5, 5] }
+        };
+
+        let running = false;
+        let timer = null;
+        let phaseIndex = 0;
+        let secondLeft = 0;
+        let cycles = 0;
+        let animFrame = null;
+        let scaleTarget = 1;
+        let scaleCurrent = 1;
+
+        const circle = document.getElementById('breathCircle');
+        const phaseEl = document.getElementById('breathPhase');
+        const countEl = document.getElementById('breathCount');
+        const btn = document.getElementById('breathBtn');
+        const cyclesEl = document.getElementById('cyclesLabel');
+        const ripple = document.getElementById('ripple');
+
+        function getMode() { return MODES[document.getElementById('breathMode').value]; }
+
+        function resetBreath() {
+            stopBreath();
+            phaseEl.textContent = '—';
+            countEl.textContent = '';
+            cycles = 0;
+            cyclesEl.textContent = '0 cycles completed';
+            scaleCurrent = 1;
+            circle.style.transform = 'scale(1)';
+        }
+
+        function toggleBreath() {
+            if (running) { stopBreath(); }
+            else { startBreath(); }
+        }
+
+        function startBreath() {
+            running = true;
+            btn.textContent = 'Stop';
+            btn.classList.add('stop');
+            phaseIndex = 0;
+            cycles = 0;
+            cyclesEl.textContent = '0 cycles completed';
+            beginPhase();
+            animateCircle();
+        }
+
+        function stopBreath() {
+            running = false;
+            clearTimeout(timer);
+            cancelAnimationFrame(animFrame);
+            btn.textContent = 'Start';
+            btn.classList.remove('stop');
+            phaseEl.textContent = '—';
+            countEl.textContent = '';
+            scaleTarget = 1;
+        }
+
+        function beginPhase() {
+            if (!running) return;
+            const mode = getMode();
+            const phase = mode.phases[phaseIndex];
+            const dur = mode.durations[phaseIndex];
+
+            phaseEl.textContent = phase;
+            secondLeft = dur;
+            countEl.textContent = secondLeft;
+
+            // Scale: breathe in / hold-after-in → expand; breathe out / hold-after-out → shrink
+            const isIn = phase === 'Breathe in' || (phase === 'Hold' && phaseIndex === 1 && mode.phases[0] === 'Breathe in');
+            scaleTarget = isIn ? 1.65 : 0.7;
+
+            if (phase === 'Breathe in') {
+                ripple.style.animation = 'none';
+                void ripple.offsetWidth;
+                ripple.style.animation = `rippleOut ${dur}s linear`;
+            } else {
+                ripple.style.animation = 'none';
+            }
+
+            tickCountdown(dur);
+        }
+
+        function tickCountdown(total) {
+            if (!running) return;
+            const interval = setInterval(() => {
+                if (!running) { clearInterval(interval); return; }
+                secondLeft--;
+                countEl.textContent = secondLeft > 0 ? secondLeft : '';
+                if (secondLeft <= 0) {
+                    clearInterval(interval);
+                    nextPhase();
+                }
+            }, 1000);
+        }
+
+        function nextPhase() {
+            if (!running) return;
+            const mode = getMode();
+            phaseIndex++;
+            if (phaseIndex >= mode.phases.length) {
+                phaseIndex = 0;
+                cycles++;
+                cyclesEl.textContent = cycles + ' cycle' + (cycles !== 1 ? 's' : '') + ' completed';
+            }
+            beginPhase();
+        }
+
+        function animateCircle() {
+            scaleCurrent += (scaleTarget - scaleCurrent) * 0.04;
+            circle.style.transform = `scale(${scaleCurrent})`;
+            animFrame = requestAnimationFrame(animateCircle);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+    min-height: 100%;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-image: url('background-home.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 64px;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-logo {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: white !important;
+    text-decoration: none !important;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: rgba(255,255,255,0.75) !important;
+    text-decoration: none !important;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover { color: white !important; }
+
+.nav-cta {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 8px 18px !important;
+    color: white !important;
+    transition: background 0.2s !important;
+}
+
+.nav-cta:hover { background: rgba(255,255,255,0.22) !important; }
+
+.page {
+    padding: 36px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.section { margin-bottom: 40px; }
+
+.section-title {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin: 0 0 16px 4px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+    padding: 18px 22px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    transition: background 0.2s ease, border 0.2s ease;
+}
+
+.card:hover {
+    background: rgba(255,255,255,0.11);
+    border: 1px solid rgba(255,255,255,0.28);
+}
+
+.card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.card-body {
+    font-size: 0.78rem;
+    font-weight: 400;
+    line-height: 1.6;
+    opacity: 0.85;
+}
+
+.card-body strong { font-weight: 700; opacity: 1; }
+
+.card-body a {
+    color: white !important;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* BREATHING SECTION LAYOUT */
+.breathing-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.breathing-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+/* BREATHING ANIMATOR */
+.breath-widget {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 22px 20px;
+    width: 220px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.breath-widget-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+}
+
+.breath-select-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.breath-select {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 10px;
+    color: white;
+    font-family: inherit;
+    font-size: 0.75rem;
+    padding: 7px 10px;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.breath-select option { background: #1a2f3a; color: white; }
+
+.circle-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.breath-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(125,255,210,0.25);
+}
+
+.breath-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 38%, rgba(125,255,210,0.55), rgba(125,255,210,0.18));
+    border: 1.5px solid rgba(125,255,210,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s linear;
+}
+
+.ripple {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(125,255,210,0.15);
+    animation: none;
+}
+
+@keyframes rippleOut {
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+.breath-phase {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: rgba(125,255,210,0.9);
+    letter-spacing: 0.04em;
+    min-height: 22px;
+    text-align: center;
+}
+
+.breath-count {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: white;
+    min-height: 36px;
+    text-align: center;
+    line-height: 1;
+}
+
+.breath-btn {
+    width: 100%;
+    padding: 9px 0;
+    border-radius: 12px;
+    border: 1px solid rgba(125,255,210,0.3);
+    background: rgba(125,255,210,0.1);
+    color: rgba(125,255,210,0.9);
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    letter-spacing: 0.03em;
+}
+
+.breath-btn:hover { background: rgba(125,255,210,0.2); }
+.breath-btn.stop { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.15); }
+.breath-btn.stop:hover { background: rgba(255,255,255,0.12); }
+
+.cycles-label {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+}

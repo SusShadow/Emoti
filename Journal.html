@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/logo.png">
+    <title>Journal — Emoti</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            height: 100%;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-image: url('background-home.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            height: 64px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            color: white !important;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.75) !important;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: white !important; }
+
+        .nav-cta {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 8px 18px !important;
+            color: white !important;
+            transition: background 0.2s !important;
+        }
+
+        .nav-cta:hover { background: rgba(255,255,255,0.22) !important; }
+
+        a:link, a:visited, a:hover { text-decoration: none; }
+
+        /* LAYOUT */
+        .journal-layout {
+            display: grid;
+            grid-template-columns: 220px 1fr 220px;
+            gap: 16px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: calc(100vh - 64px);
+        }
+
+        /* SIDEBARS */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .sidebar-section {
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .sidebar-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 12px;
+        }
+
+        .tips-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tips-list li {
+            font-size: 0.75rem;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.65);
+            padding-left: 10px;
+            border-left: 2px solid rgba(255,255,255,0.15);
+        }
+
+        .prompt-chip {
+            font-size: 0.74rem;
+            color: rgba(255,255,255,0.65);
+            padding: 8px 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            line-height: 1.4;
+            display: block;
+            width: 100%;
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .prompt-chip:hover {
+            background: rgba(255,255,255,0.12);
+            color: white;
+        }
+
+        /* MAIN JOURNAL AREA */
+        .journal-main {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* WRITE PANEL */
+        .write-panel {
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.13);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.15);
+        }
+
+        .panel-header-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel-icon {
+            font-size: 1.1rem;
+        }
+
+        .panel-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .panel-sub {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.45);
+            margin-top: 1px;
+        }
+
+        .panel-body {
+            padding: 20px;
+        }
+
+        /* MOOD ROW */
+        .mood-label {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 10px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+
+        .mood-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-bottom: 18px;
+        }
+
+        .mood-btn {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 20px;
+            padding: 5px 13px;
+            font-size: 0.77rem;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .mood-btn:hover {
+            background: rgba(255,255,255,0.12);
+            color: white;
+        }
+
+        .mood-btn.selected {
+            background: rgba(125,255,210,0.15);
+            border-color: rgba(125,255,210,0.4);
+            color: rgba(125,255,210,0.95);
+        }
+
+        /* TEXTAREA */
+        #entryBox {
+            width: 100%;
+            min-height: 180px;
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.06);
+            color: white;
+            font-family: inherit;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            outline: none;
+            resize: vertical;
+            transition: border-color 0.2s, background 0.2s;
+            margin-bottom: 12px;
+        }
+
+        #entryBox::placeholder { color: rgba(255,255,255,0.25); }
+
+        #entryBox:focus {
+            border-color: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.09);
+        }
+
+        .bottom-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .word-count {
+            font-size: 0.73rem;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .save-btn {
+            padding: 9px 22px;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.13);
+            color: white;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .save-btn:hover { background: rgba(255,255,255,0.22); }
+        .save-btn:active { transform: scale(0.98); }
+        .save-btn:disabled { opacity: 0.35; cursor: default; }
+
+        .saved-flash {
+            font-size: 0.75rem;
+            color: rgba(125,255,210,0.8);
+            opacity: 0;
+            transition: opacity 0.3s;
+            margin-left: 10px;
+        }
+
+        /* PAST ENTRIES */
+        .entries-panel {
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.13);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .entries-list {
+            padding: 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 420px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.15) transparent;
+        }
+
+        .entry-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            padding: 13px 15px;
+            transition: background 0.2s;
+        }
+
+        .entry-card:hover { background: rgba(255,255,255,0.08); }
+
+        .entry-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .entry-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mood-pill {
+            font-size: 0.7rem;
+            background: rgba(125,255,210,0.12);
+            border: 1px solid rgba(125,255,210,0.25);
+            color: rgba(125,255,210,0.85);
+            border-radius: 20px;
+            padding: 2px 9px;
+        }
+
+        .entry-date {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.35);
+        }
+
+        .entry-text {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .delete-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.25);
+            font-size: 0.72rem;
+            cursor: pointer;
+            font-family: inherit;
+            padding: 0;
+            transition: color 0.2s;
+        }
+
+        .delete-btn:hover { color: rgba(255,100,100,0.75); }
+
+        .empty-state {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.25);
+            font-style: italic;
+            text-align: center;
+            padding: 24px 0;
+        }
+
+        /* RIGHT SIDEBAR STATS */
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: rgba(125,255,210,0.9);
+        }
+
+        .streak-bar {
+            display: flex;
+            gap: 4px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .streak-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.55rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .streak-dot.filled {
+            background: rgba(125,255,210,0.2);
+            border-color: rgba(125,255,210,0.35);
+            color: rgba(125,255,210,0.7);
+        }
+
+        .mood-history {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .mood-history-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .mood-bar-wrap {
+            flex: 1;
+            margin: 0 8px;
+            height: 4px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .mood-bar-fill {
+            height: 100%;
+            background: rgba(125,255,210,0.5);
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="main.html" class="nav-logo">EMOTI</a>
+        <div class="nav-links">
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="resources.html">Resources</a>
+            <a href="emoti-ai.html" class="nav-cta">Talk with Emoti AI</a>
+        </div>
+    </nav>
+
+    <div class="journal-layout">
+
+        <!-- LEFT SIDEBAR -->
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">📝 Tips</div>
+                <ul class="tips-list">
+                    <li>Write freely — no grammar rules here</li>
+                    <li>Even one sentence counts</li>
+                    <li>Your entries stay private, saved only on your device</li>
+                    <li>Try journaling at the same time each day</li>
+                    <li>Be honest with yourself — this is just for you</li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-title">✨ Prompts</div>
+                <button class="prompt-chip" onclick="usePrompt('What\'s been on my mind lately is...')">What's been on my mind lately...</button>
+                <button class="prompt-chip" onclick="usePrompt('One thing I\'m grateful for today is...')">One thing I'm grateful for...</button>
+                <button class="prompt-chip" onclick="usePrompt('I\'m struggling with...')">I'm struggling with...</button>
+                <button class="prompt-chip" onclick="usePrompt('Something I\'m proud of is...')">Something I'm proud of...</button>
+                <button class="prompt-chip" onclick="usePrompt('Today felt hard because...')">Today felt hard because...</button>
+                <button class="prompt-chip" onclick="usePrompt('Right now I feel...')">Right now I feel...</button>
+            </div>
+        </div>
+
+        <!-- MAIN -->
+        <div class="journal-main">
+
+            <!-- WRITE PANEL -->
+            <div class="write-panel">
+                <div class="panel-header">
+                    <div class="panel-header-info">
+                        <span class="panel-icon">📓</span>
+                        <div>
+                            <div class="panel-title">New Entry</div>
+                            <div class="panel-sub" id="currentDate"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="mood-label">HOW ARE YOU FEELING?</div>
+                    <div class="mood-row" id="moodRow">
+                        <button class="mood-btn" onclick="selectMood(this,'😌 Calm')">😌 Calm</button>
+                        <button class="mood-btn" onclick="selectMood(this,'😔 Sad')">😔 Sad</button>
+                        <button class="mood-btn" onclick="selectMood(this,'😰 Anxious')">😰 Anxious</button>
+                        <button class="mood-btn" onclick="selectMood(this,'😡 Frustrated')">😡 Frustrated</button>
+                        <button class="mood-btn" onclick="selectMood(this,'😊 Happy')">😊 Happy</button>
+                        <button class="mood-btn" onclick="selectMood(this,'😶 Numb')">😶 Numb</button>
+                        <button class="mood-btn" onclick="selectMood(this,'😴 Tired')">😴 Tired</button>
+                        <button class="mood-btn" onclick="selectMood(this,'🤞 Hopeful')">🤞 Hopeful</button>
+                    </div>
+                    <textarea id="entryBox" placeholder="Write whatever's on your mind. There's no right or wrong way to do this..." oninput="updateCount()"></textarea>
+                    <div class="bottom-row">
+                        <div style="display:flex;align-items:center;">
+                            <span class="word-count" id="wordCount">0 words</span>
+                            <span class="saved-flash" id="savedFlash">✓ Saved</span>
+                        </div>
+                        <button class="save-btn" id="saveBtn" onclick="saveEntry()" disabled>Save entry</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAST ENTRIES -->
+            <div class="entries-panel">
+                <div class="panel-header">
+                    <div class="panel-header-info">
+                        <span class="panel-icon">🕓</span>
+                        <div>
+                            <div class="panel-title">Past Entries</div>
+                            <div class="panel-sub" id="entryCountLabel">No entries yet</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="entries-list" id="entriesList">
+                    <div class="empty-state">Your saved entries will appear here.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDEBAR -->
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">📊 Your stats</div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Total entries</div>
+                    <div class="stat-value" id="statTotal">0</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Words written</div>
+                    <div class="stat-value" id="statWords">0</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-label">Last 7 days</div>
+                    <div class="streak-bar" id="streakBar"></div>
+                </div>
+            </div>
+
+            <div class="sidebar-section" id="moodBreakdownSection" style="display:none;">
+                <div class="sidebar-title">🌈 Mood log</div>
+                <div class="mood-history" id="moodBreakdown"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let entries = [];
+        let selectedMood = '';
+
+        try { entries = JSON.parse(localStorage.getItem('emoti_journal') || '[]'); } catch(e) { entries = []; }
+
+        // Set current date
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('en-GB', {
+            weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+        });
+
+        function selectMood(btn, mood) {
+            document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedMood = mood;
+        }
+
+        function usePrompt(text) {
+            const box = document.getElementById('entryBox');
+            box.value = text;
+            box.focus();
+            box.setSelectionRange(text.length, text.length);
+            updateCount();
+        }
+
+        function updateCount() {
+            const text = document.getElementById('entryBox').value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            document.getElementById('wordCount').textContent = words + ' word' + (words !== 1 ? 's' : '');
+            document.getElementById('saveBtn').disabled = text.length === 0;
+        }
+
+        function saveEntry() {
+            const text = document.getElementById('entryBox').value.trim();
+            if (!text) return;
+
+            const entry = {
+                id: Date.now(),
+                text,
+                mood: selectedMood,
+                date: new Date().toLocaleDateString('en-GB', {
+                    day: 'numeric', month: 'short', year: 'numeric',
+                    hour: '2-digit', minute: '2-digit'
+                }),
+                dayKey: new Date().toDateString(),
+                wordCount: text.split(/\s+/).length
+            };
+
+            entries.unshift(entry);
+            persist();
+
+            document.getElementById('entryBox').value = '';
+            document.getElementById('wordCount').textContent = '0 words';
+            document.getElementById('saveBtn').disabled = true;
+            document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
+            selectedMood = '';
+
+            const flash = document.getElementById('savedFlash');
+            flash.style.opacity = '1';
+            setTimeout(() => flash.style.opacity = '0', 2000);
+
+            render();
+        }
+
+        function deleteEntry(id) {
+            entries = entries.filter(e => e.id !== id);
+            persist();
+            render();
+        }
+
+        function persist() {
+            try { localStorage.setItem('emoti_journal', JSON.stringify(entries)); } catch(e) {}
+        }
+
+        function render() {
+            renderEntries();
+            renderStats();
+            renderMoodBreakdown();
+        }
+
+        function renderEntries() {
+            const list = document.getElementById('entriesList');
+            const label = document.getElementById('entryCountLabel');
+            label.textContent = entries.length === 0 ? 'No entries yet' : entries.length + ' entr' + (entries.length === 1 ? 'y' : 'ies');
+
+            if (entries.length === 0) {
+                list.innerHTML = '<div class="empty-state">Your saved entries will appear here.</div>';
+                return;
+            }
+
+            list.innerHTML = entries.map(e => `
+                <div class="entry-card">
+                    <div class="entry-card-top">
+                        <div class="entry-meta">
+                            ${e.mood ? `<span class="mood-pill">${e.mood}</span>` : ''}
+                            <span class="entry-date">${e.date}</span>
+                        </div>
+                        <button class="delete-btn" onclick="deleteEntry(${e.id})">Delete</button>
+                    </div>
+                    <div class="entry-text">${e.text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+                </div>
+            `).join('');
+        }
+
+        function renderStats() {
+            const totalWords = entries.reduce((sum, e) => sum + (e.wordCount || 0), 0);
+            document.getElementById('statTotal').textContent = entries.length;
+            document.getElementById('statWords').textContent = totalWords.toLocaleString();
+
+            // Last 7 days streak
+            const bar = document.getElementById('streakBar');
+            const days = [];
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                days.push(d.toDateString());
+            }
+
+            const writtenDays = new Set(entries.map(e => e.dayKey));
+            bar.innerHTML = days.map(d => {
+                const written = writtenDays.has(d);
+                const label = new Date(d).toLocaleDateString('en-GB', { weekday: 'short' }).slice(0,1);
+                return `<div class="streak-dot ${written ? 'filled' : ''}" title="${d}">${label}</div>`;
+            }).join('');
+        }
+
+        function renderMoodBreakdown() {
+            const section = document.getElementById('moodBreakdownSection');
+            const container = document.getElementById('moodBreakdown');
+            const moodEntries = entries.filter(e => e.mood);
+
+            if (moodEntries.length === 0) { section.style.display = 'none'; return; }
+
+            section.style.display = 'block';
+            const counts = {};
+            moodEntries.forEach(e => { counts[e.mood] = (counts[e.mood] || 0) + 1; });
+            const max = Math.max(...Object.values(counts));
+
+            container.innerHTML = Object.entries(counts)
+                .sort((a,b) => b[1] - a[1])
+                .map(([mood, count]) => `
+                    <div class="mood-history-item">
+                        <span>${mood}</span>
+                        <div class="mood-bar-wrap"><div class="mood-bar-fill" style="width:${Math.round(count/max*100)}%"></div></div>
+                        <span>${count}</span>
+                    </div>
+                `).join('');
+        }
+
+        render();
+    </script>
+</body>
+</html>
